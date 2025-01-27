@@ -16,7 +16,7 @@ Feature: Get Product request
     Then http_status_code is <httpCode>
     Examples:
       | scenarioNo | moduleName | httpMethod | scenarioName                  | httpCode |
-      | 03         | "product"  | "GET"      | "Invalid_Get_Product_Request" | 404      |
+      | 02         | "product"  | "GET"      | "Invalid_Get_Product_Request" | 404      |
 
   @ValidSingleProductRequest @APIChaining
   Scenario Outline:  <scenarioNo> <scenarioName>
@@ -24,5 +24,5 @@ Feature: Get Product request
     Then http_status_code is <httpCode>
     Examples:
       | scenarioNo | moduleName | httpMethod | scenarioName               | httpCode |
-      | 04         | "product"  | "GET"      | "Valid_Get_Single_Product" | 200      |
+      | 03         | "product"  | "GET"      | "Valid_Get_Single_Product" | 200      |
 

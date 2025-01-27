@@ -12,7 +12,6 @@ public class RestAssuredApiCall {
 
     public static void setup(String baseURL)
     {
-
         RestAssured.baseURI = baseURL;
     }
 

@@ -1,10 +1,8 @@
 package product.cucumber.stepdefinitions;
 
 import static com.example.productapi.config.GlobalConfig.APIsGlobalConfigs.*;
-
 import com.example.productapi.apirouting.BaseRouteRestCall;
 import com.example.productapi.modules.products.CreateProductModule;
-import com.example.productapi.modules.products.FetchProductModule;
 import com.example.productapi.modules.products.UpdateProductModule;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,9 +10,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.jetbrains.annotations.NotNull;
-
 import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -70,8 +66,8 @@ public class ApiStepDefinition {
         assertEquals(responseBodyCode, RESPONSE_BODY_STATUS_CODE);
     }
 
-    @And("response_body matches expected data for request {string}")
-    public void response_body_matches_expected_data(String httpMethod) {
+    @And("response_body matches expected data for request {string} and {string}")
+    public void response_body_matches_expected_data(String httpMethod, String moduleName) {
         try {
             // Ensure the RESPONSE_MESSAGE is not null
             if (RESPONSE_MESSAGE == null) {
@@ -81,14 +77,30 @@ public class ApiStepDefinition {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonResponse = objectMapper.readTree(RESPONSE_MESSAGE);
             // Initialize the expected data map
-            Map<String, Object> expectedData;
+            Map<String, Object> expectedData = Map.of();
             switch (httpMethod.toUpperCase()) {
                 case "POST":
-                    expectedData = objectMapper.convertValue(CreateProductModule.expectedProductPayload, Map.class);
+                    switch (moduleName) {
+                        case PRODUCT_MODULE:
+                            expectedData = objectMapper.convertValue(CreateProductModule.expectedProductPayload, Map.class);
+                            break;
+                        case USERS_MODULE:
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Unsupported moduleName for POST: " + moduleName);
+                    }
                     break;
                 case "GET":
                 case "PUT":
-                    expectedData = objectMapper.convertValue(UpdateProductModule.expectedProductPayload, Map.class);
+                    switch (moduleName) {
+                        case PRODUCT_MODULE:
+                            expectedData = objectMapper.convertValue(UpdateProductModule.expectedProductPayload, Map.class);
+                            break;
+                        case USERS_MODULE:
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Unsupported moduleName for PUT: " + moduleName);
+                    }
                     break;
                 case "PATCH":
                 case "DELETE":

@@ -12,4 +12,5 @@ public class APIsGlobalConfigs {
 
     //############### Module Names ############################################################
     public static final String PRODUCT_MODULE = "product";
+    public static final String USERS_MODULE = "users";
 }

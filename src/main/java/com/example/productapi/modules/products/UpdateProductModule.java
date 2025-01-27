@@ -13,7 +13,7 @@ import static com.example.productapi.config.product.UpdateProductConfig.FETCH_AP
 
 
 public class UpdateProductModule {
-    private static Faker faker = new Faker();
+    private static final Faker faker = new Faker();
     public static ProductPayload expectedProductPayload;
     public static void sendPutRequestWithScenarioName(@NotNull String scenarioName){
                 switch (scenarioName) {

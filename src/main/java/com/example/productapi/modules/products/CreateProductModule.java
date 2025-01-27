@@ -13,7 +13,7 @@ import static com.example.productapi.config.product.CreateProductConfig.FETCH_AP
 
 public class CreateProductModule {
 
-    private static Faker faker = new Faker();
+    private static final Faker faker = new Faker();
     public static ProductPayload expectedProductPayload;
     public static void sendCreateRequestWithScenarioName(@NotNull String scenarioName) {
         switch (scenarioName) {
@@ -62,7 +62,6 @@ public class CreateProductModule {
                 String.valueOf(JsonUtils.objectToJsonString(productPayload)));
         APIsGlobalConfigs.HTTP_STATUS_CODE = response.getStatusCode();
         System.out.println("Response Status Code: " + response.getStatusCode());
-
         return productPayload;
     }
 }

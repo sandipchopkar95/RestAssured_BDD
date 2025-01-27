@@ -8,10 +8,9 @@ public class JsonUtils {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = null;
         try {
-            jsonString = objectMapper.writeValueAsString(object);  // Serialize object to JSON string
+            jsonString = objectMapper.writeValueAsString(object);
         } catch (Exception e) {
             e.printStackTrace();
-            // You can log the error or throw a custom exception based on your preference
         }
         return jsonString;
     }

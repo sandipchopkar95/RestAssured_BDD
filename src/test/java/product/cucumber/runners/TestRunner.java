@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features",
         glue = {"product.cucumber.stepdefinitions"},
         plugin = {"pretty", "html:target/cucumber-reports.html"},
-        //tags = "@APIChaining",
+        tags = "@APIChaining",
         monochrome = true
 
 )
